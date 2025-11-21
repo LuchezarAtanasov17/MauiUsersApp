@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiUsersApp.Data;
+using MauiUsersApp.Services;
+using Microsoft.Extensions.Logging;
 
 namespace MauiUsersApp
 {
@@ -20,6 +22,9 @@ namespace MauiUsersApp
 #endif
 
             Database.Initialize();
+
+            builder.Services.AddSingleton<IUserService, UserService>();
+
             return builder.Build();
         }
     }
