@@ -19,6 +19,7 @@ namespace MauiUsersApp
     		builder.Logging.AddDebug();
 #endif
 
+            Database.Initialize();
             return builder.Build();
         }
     }
