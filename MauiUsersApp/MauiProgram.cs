@@ -1,5 +1,7 @@
 ﻿using MauiUsersApp.Data;
 using MauiUsersApp.Services;
+using MauiUsersApp.ViewModels;
+using MauiUsersApp.Views;
 using Microsoft.Extensions.Logging;
 
 namespace MauiUsersApp
@@ -24,6 +26,8 @@ namespace MauiUsersApp
             Database.Initialize();
 
             builder.Services.AddSingleton<IUserService, UserService>();
+            builder.Services.AddSingleton<UsersViewModel>();
+            builder.Services.AddSingleton<UsersPage>();
 
             return builder.Build();
         }
