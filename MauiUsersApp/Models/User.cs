@@ -28,7 +28,7 @@ public class User
     /// <summary>
     /// Gets or sets the username.
     /// </summary>
-    public string UserName { get; set; }
+    public string Username { get; set; }
 
     /// <summary>
     /// Gets or sets the phone.
