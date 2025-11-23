@@ -9,4 +9,14 @@ public partial class UsersPage : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is UsersViewModel vm)
+        {
+            vm.LoadUsersCommand.Execute(null);
+        }
+    }
 }

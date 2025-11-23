@@ -9,6 +9,7 @@ namespace MauiUsersApp
             InitializeComponent();
 
             Routing.RegisterRoute("UsersPage", typeof(UsersPage));
+            Routing.RegisterRoute("EditUserPage", typeof(EditUserPage));
         }
     }
 }
