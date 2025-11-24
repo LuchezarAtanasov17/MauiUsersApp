@@ -28,7 +28,8 @@
             <Button Text="Save" Command="{Binding SaveCommand}" />
             <Button Text="Delete"
                     Command="{Binding DeleteCommand}"
-                    BackgroundColor="Red"/>
+                    BackgroundColor="Red"
+                    IsVisible="{Binding IsEditMode}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -31,10 +31,13 @@ public partial class EditUserViewModel(IUserService userService)
 
     public string Title => UserId == 0 ? "Add User" : "Edit User";
 
+    public bool IsEditMode => UserId > 0;
+
     partial void OnUserIdChanged(int id)
     {
         LoadUser(id);
         OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(IsEditMode));
     }
 
     private async void LoadUser(int id)
