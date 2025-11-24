@@ -29,9 +29,12 @@ public partial class EditUserViewModel(IUserService userService)
     [ObservableProperty]
     bool isActive;
 
+    public string Title => UserId == 0 ? "Add User" : "Edit User";
+
     partial void OnUserIdChanged(int id)
     {
         LoadUser(id);
+        OnPropertyChanged(nameof(Title));
     }
 
     private async void LoadUser(int id)
