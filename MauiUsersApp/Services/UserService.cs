@@ -78,4 +78,16 @@ public class UserService : IUserService
 
         return user;
     }
+
+    /// <inheritdoc/>
+    public async Task<int> DeleteUserAsync(int id)
+    {
+        using var connection = Database.GetConnection();
+
+        string sql = "DELETE FROM Users WHERE Id = @Id";
+
+        int affectedRows = await connection.ExecuteAsync(sql, new { Id = id });
+
+        return affectedRows;
+    }
 }

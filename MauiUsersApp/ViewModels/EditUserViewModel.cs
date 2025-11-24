@@ -74,4 +74,24 @@ public partial class EditUserViewModel(IUserService userService)
 
         await Shell.Current.GoToAsync("..");
     }
+
+    [RelayCommand]
+    private async Task DeleteAsync()
+    {
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Delete User",
+            "Are you sure you want to delete this user?",
+            "Yes", "No");
+
+        if (!confirm)
+        {
+            return;
+        }
+
+        await _userService.DeleteUserAsync(UserId);
+
+        await Shell.Current.DisplayAlert("Deleted", "User was deleted.", "OK");
+
+        await Shell.Current.GoToAsync("/UsersPage");
+    }
 }

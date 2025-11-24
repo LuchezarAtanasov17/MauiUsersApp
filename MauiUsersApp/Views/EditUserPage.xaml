@@ -18,6 +18,9 @@
             </HorizontalStackLayout>
 
             <Button Text="Save" Command="{Binding SaveCommand}" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="Red"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

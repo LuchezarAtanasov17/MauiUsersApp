@@ -41,4 +41,11 @@ public interface IUserService
     /// <param name="password">the password</param>
     /// <returns>the specified user or null</returns>
     Task<User?> GetUserByEmailAndPasswordAsync(string email, string password);
+
+    /// <summary>
+    /// Deletes a specified user by ID.
+    /// </summary>
+    /// <param name="id">the ID</param>
+    /// <returns>the number of affected rows</returns>
+    Task<int> DeleteUserAsync(int id);
 }
