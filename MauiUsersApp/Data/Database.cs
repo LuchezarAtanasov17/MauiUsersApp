@@ -13,23 +13,15 @@ public static class Database
 
         connection.Open();
 
-        if (!File.Exists(dbPath))
-        {
-            SqliteCommand tableCommand = connection.CreateCommand();
+        connection.Execute(@"CREATE TABLE IF NOT EXISTS Users(
+                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             Name TEXT NOT NULL,
+                             Username TEXT NOT NULL,
+                             Phone TEXT,
+                             Email TEXT,
+                             Password TEXT,
+                             IsActive INTEGER NOT NULL);");
 
-            tableCommand.CommandText =
-                @"CREATE TABLE Users(
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Name TEXT NOT NULL,
-                        Username TEXT NOT NULL,
-                        Phone TEXT,
-                        Email TEXT,
-                        Password TEXT,
-                        IsActive INTEGER NOT NULL)";
-
-            tableCommand.ExecuteNonQuery();
-
-        }
         var count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Users");
 
         if (count == 0)
