@@ -5,34 +5,66 @@ using MauiUsersApp.Services;
 
 namespace MauiUsersApp.ViewModels;
 
+/// <summary>
+/// Represents user view model
+/// </summary>
+/// <param name="userService">the user service</param>
 [QueryProperty(nameof(UserId), "UserId")]
 public partial class EditUserViewModel(IUserService userService)
     : ObservableObject
 {
     private readonly IUserService _userService = userService;
 
+    /// <summary>
+    /// Gets or sets the user ID.
+    /// </summary>
     [ObservableProperty]
     int userId;
 
+    /// <summary>
+    /// Gets or sets the name.
+    /// </summary>
     [ObservableProperty]
     string name;
 
+    /// <summary>
+    /// Gets or sets the username.
+    /// </summary>
     [ObservableProperty]
     string username;
 
+    /// <summary>
+    /// Gets or sets the email.
+    /// </summary>
     [ObservableProperty]
     string email;
 
+    /// <summary>
+    /// Gets or sets the phone.
+    /// </summary>
     [ObservableProperty]
     string phone;
 
+    /// <summary>
+    /// Gets or sets if the user is active or not.
+    /// </summary>
     [ObservableProperty]
     bool isActive;
 
+    /// <summary>
+    /// Gets the title depending on whether the user is being created or edited.
+    /// </summary>
     public string Title => UserId == 0 ? "Add User" : "Edit User";
 
+    /// <summary>
+    /// Gets if the page is in edit mode.
+    /// </summary>
     public bool IsEditMode => UserId > 0;
 
+    /// <summary>
+    /// Called when the user ID is changed. Loads the user data updates UI properties.
+    /// </summary>
+    /// <param name="id"></param>
     partial void OnUserIdChanged(int id)
     {
         LoadUser(id);

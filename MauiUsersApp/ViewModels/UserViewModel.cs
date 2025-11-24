@@ -6,10 +6,17 @@ using System.Collections.ObjectModel;
 
 namespace MauiUsersApp.ViewModels;
 
+/// <summary>
+/// Represents user view model.
+/// </summary>
 public partial class UsersViewModel : ObservableObject
 {
     private readonly IUserService _userService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UsersViewModel"/> class.
+    /// </summary>
+    /// <param name="userService">the user service</param>
     public UsersViewModel(IUserService userService)
     {
         _userService = userService;
@@ -23,16 +30,31 @@ public partial class UsersViewModel : ObservableObject
         LoadUsersCommand.Execute(null);
     }
 
+    /// <summary>
+    /// Gets or sets the users.
+    /// </summary>
     [ObservableProperty]
     ObservableCollection<User> users;
 
+    /// <summary>
+    /// Gets or sets the selected user.
+    /// </summary>
     [ObservableProperty]
     User selectedUser;
 
+    /// <summary>
+    /// Gets the command that loads users.
+    /// </summary>
     public IAsyncRelayCommand LoadUsersCommand { get; }
 
+    /// <summary>
+    /// Gets the command that gets the selected user.
+    /// </summary>
     public IAsyncRelayCommand UserSelectedCommand { get; }
 
+    /// <summary>
+    /// Gets the command that adds user.
+    /// </summary>
     public IAsyncRelayCommand AddUserCommand { get; }
 
 

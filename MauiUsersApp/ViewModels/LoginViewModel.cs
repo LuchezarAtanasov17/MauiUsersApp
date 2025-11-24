@@ -4,14 +4,24 @@ using MauiUsersApp.Services;
 
 namespace MauiUsersApp.ViewModels;
 
+/// <summary>
+/// Represents login view model.
+/// </summary>
+/// <param name="userService">the user service</param>
 public partial class LoginViewModel(IUserService userService) 
     : ObservableObject
 {
     private readonly IUserService _userService = userService;
 
+    /// <summary>
+    /// Gets or sets the email.
+    /// </summary>
     [ObservableProperty]
     string email;
 
+    /// <summary>
+    /// Gets or sets the password.
+    /// </summary>
     [ObservableProperty]
     string password;
 
