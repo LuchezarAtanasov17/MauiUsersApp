@@ -18,6 +18,7 @@ public partial class UsersViewModel : ObservableObject
 
         LoadUsersCommand = new AsyncRelayCommand(LoadUsersAsync);
         UserSelectedCommand = new AsyncRelayCommand(OnUserSelected);
+        AddUserCommand = new AsyncRelayCommand(OnAddUser);
 
         LoadUsersCommand.Execute(null);
     }
@@ -31,6 +32,9 @@ public partial class UsersViewModel : ObservableObject
     public IAsyncRelayCommand LoadUsersCommand { get; }
 
     public IAsyncRelayCommand UserSelectedCommand { get; }
+
+    public IAsyncRelayCommand AddUserCommand { get; }
+
 
     private async Task LoadUsersAsync()
     {
@@ -56,5 +60,10 @@ public partial class UsersViewModel : ObservableObject
         SelectedUser = null;
 
         await Shell.Current.GoToAsync($"EditUserPage?UserId={userId}");
+    }
+
+    private async Task OnAddUser()
+    {
+        await Shell.Current.GoToAsync("EditUserPage");
     }
 }

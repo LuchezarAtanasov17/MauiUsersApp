@@ -7,11 +7,14 @@
 
     <VerticalStackLayout Padding="15" Spacing="10">
 
-        <CollectionView 
+        <Button Text="Add User" Command="{Binding AddUserCommand}" />
+
+        <CollectionView
             ItemsSource="{Binding Users}"
             SelectionMode="Single"
             SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
-            SelectionChangedCommand="{Binding UserSelectedCommand}">
+            SelectionChangedCommand="{Binding UserSelectedCommand}"
+            HeightRequest="600">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>

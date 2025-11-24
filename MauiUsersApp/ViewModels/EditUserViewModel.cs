@@ -53,7 +53,7 @@ public partial class EditUserViewModel(IUserService userService)
     [RelayCommand]
     private async Task SaveAsync()
     {
-        var updated = new User
+        var user = new User
         {
             Id = UserId,
             Name = Name,
@@ -63,7 +63,14 @@ public partial class EditUserViewModel(IUserService userService)
             IsActive = IsActive
         };
 
-        await _userService.UpdateUserAsync(updated);
+        if (UserId == 0)
+        {
+            await _userService.CreateUserAsync(user);
+        }
+        else
+        {
+            await _userService.UpdateUserAsync(user);
+        }
 
         await Shell.Current.GoToAsync("..");
     }
