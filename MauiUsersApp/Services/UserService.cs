@@ -63,4 +63,19 @@ public class UserService : IUserService
 
         return affectedRows;
     }
+
+    /// <inheritdoc/>
+    public async Task<User?> GetUserByEmailAndPasswordAsync(string email, string password)
+    {
+        using var connection = Database.GetConnection();
+
+        string sql = @"SELECT * FROM Users
+                        WHERE Email = @Email AND Password = @Password
+                        LIMIT 1;";
+
+        User? user = await connection
+            .QueryFirstOrDefaultAsync<User>(sql, new { Email = email, Password = password });
+
+        return user;
+    }
 }

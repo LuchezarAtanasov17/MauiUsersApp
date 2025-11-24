@@ -10,7 +10,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate views:UsersPage}"
+        ContentTemplate="{DataTemplate views:LoginPage}"
         Route="MainPage" />
 
 </Shell>

@@ -30,6 +30,8 @@ namespace MauiUsersApp
             builder.Services.AddSingleton<UsersPage>();
             builder.Services.AddTransient<EditUserViewModel>();
             builder.Services.AddTransient<EditUserPage>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
 
             return builder.Build();
         }

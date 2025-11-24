@@ -16,8 +16,8 @@ public interface IUserService
     /// <summary>
     /// Gets a specified user by ID.
     /// </summary>
-    /// <param name="id">the specified ID</param>
-    /// <returns>the user</returns>
+    /// <param name="id">the ID</param>
+    /// <returns>the specified user</returns>
     Task<User?> GetUserByIdAsync(int id);
     
     /// <summary>
@@ -33,4 +33,12 @@ public interface IUserService
     /// <param name="user">the user</param>
     /// <returns>the number of affected rows</returns>
     Task<int> UpdateUserAsync(User user);
+
+    /// <summary>
+    /// Gets a specified user by email and password.
+    /// </summary>
+    /// <param name="email">the email</param>
+    /// <param name="password">the password</param>
+    /// <returns>the specified user or null</returns>
+    Task<User?> GetUserByEmailAndPasswordAsync(string email, string password);
 }
