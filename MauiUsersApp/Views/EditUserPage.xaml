@@ -18,6 +18,7 @@
             <Entry Placeholder="Name" Text="{Binding Name}" />
             <Entry Placeholder="Username" Text="{Binding Username}" />
             <Entry Placeholder="Email" Text="{Binding Email}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" IsVisible="{Binding IsAddMode}"/>
             <Entry Placeholder="Phone" Text="{Binding Phone}" />
 
             <HorizontalStackLayout>

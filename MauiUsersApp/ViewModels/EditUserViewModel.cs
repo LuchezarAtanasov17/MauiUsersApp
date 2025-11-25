@@ -41,6 +41,12 @@ public partial class EditUserViewModel(IUserService userService)
     string email;
 
     /// <summary>
+    /// Gets or sets the password.
+    /// </summary>
+    [ObservableProperty]
+    string password;
+
+    /// <summary>
     /// Gets or sets the phone.
     /// </summary>
     [ObservableProperty]
@@ -63,6 +69,11 @@ public partial class EditUserViewModel(IUserService userService)
     public bool IsEditMode => UserId > 0;
 
     /// <summary>
+    /// Gets if the page is in add mode.
+    /// </summary>
+    public bool IsAddMode => UserId == 0;
+
+    /// <summary>
     /// Called when the user ID is changed. Loads the user data updates UI properties.
     /// </summary>
     /// <param name="id"></param>
@@ -71,6 +82,7 @@ public partial class EditUserViewModel(IUserService userService)
         LoadUser(id);
         OnPropertyChanged(nameof(Title));
         OnPropertyChanged(nameof(IsEditMode));
+        OnPropertyChanged(nameof(IsAddMode));
     }
 
     private async void LoadUser(int id)
@@ -104,7 +116,8 @@ public partial class EditUserViewModel(IUserService userService)
             Username = Username,
             Email = Email,
             Phone = Phone,
-            IsActive = IsActive
+            IsActive = IsActive,
+            Password = IsAddMode ? Password : null,
         };
 
         if (UserId == 0)
@@ -165,6 +178,12 @@ public partial class EditUserViewModel(IUserService userService)
             return false;
         }
 
+        if (IsAddMode && string.IsNullOrWhiteSpace(Password))
+        {
+            ShowAlert("Password is required.");
+            return false;
+        }
+
         if (!IsPhoneValid(Phone))
         {
             ShowAlert("Please enter a valid phone.");
@@ -190,7 +209,7 @@ public partial class EditUserViewModel(IUserService userService)
 
     private bool IsPhoneValid(string phone)
     {
-        if (!string.IsNullOrWhiteSpace(phone))
+        if (string.IsNullOrWhiteSpace(phone))
         {
             return false;
         }
