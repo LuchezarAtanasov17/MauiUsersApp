@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MauiUsersApp.Models;
 using MauiUsersApp.Services;
+using System.Text.RegularExpressions;
 
 namespace MauiUsersApp.ViewModels;
 
@@ -91,6 +92,11 @@ public partial class EditUserViewModel(IUserService userService)
     [RelayCommand]
     private async Task SaveAsync()
     {
+        if (!Validate())
+        {
+            return;
+        }
+
         var user = new User
         {
             Id = UserId,
@@ -131,5 +137,73 @@ public partial class EditUserViewModel(IUserService userService)
         await Shell.Current.DisplayAlert("Deleted", "User was deleted.", "OK");
 
         await Shell.Current.GoToAsync("/UsersPage");
+    }
+
+    private bool Validate()
+    {
+        if (string.IsNullOrWhiteSpace(Name))
+        {
+            ShowAlert("Name is required.");
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(Username))
+        {
+            ShowAlert("Username is required.");
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(Email))
+        {
+            ShowAlert("Email is required.");
+            return false;
+        }
+
+        if (!IsValidEmail(Email))
+        {
+            ShowAlert("Please enter a valid email.");
+            return false;
+        }
+
+        if (!IsPhoneValid(Phone))
+        {
+            ShowAlert("Please enter a valid phone.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            return false;
+        }
+
+        string regex = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$";
+
+        bool isValid = Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
+
+        return isValid;
+    }
+
+    private bool IsPhoneValid(string phone)
+    {
+        if (!string.IsNullOrWhiteSpace(phone))
+        {
+            return false;
+        }
+
+        string regex = @"^\+?[1-9]\d{1,14}$";
+
+        bool isValid = Regex.IsMatch(phone, regex, RegexOptions.IgnoreCase);
+
+        return isValid;
+    }
+
+    private async void ShowAlert(string message)
+    {
+        await Shell.Current.DisplayAlert("Validation Error", message, "OK");
     }
 }
