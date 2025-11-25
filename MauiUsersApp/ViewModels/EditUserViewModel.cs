@@ -120,13 +120,16 @@ public partial class EditUserViewModel(IUserService userService)
             Password = IsAddMode ? Password : null,
         };
 
-        if (UserId == 0)
+        if (IsAddMode)
         {
             await _userService.CreateUserAsync(user);
+
+            await Shell.Current.DisplayAlert("Success", "User created successfully.", "OK");
         }
         else
         {
             await _userService.UpdateUserAsync(user);
+            await Shell.Current.DisplayAlert("Success", "User updated successfully.", "OK");
         }
 
         await Shell.Current.GoToAsync("..");
