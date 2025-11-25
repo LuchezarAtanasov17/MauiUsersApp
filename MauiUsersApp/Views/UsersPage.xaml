@@ -23,22 +23,33 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="#cccccc" CornerRadius="10">
 
-                        <Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="*, Auto"
+                          Padding="10"
+                          Margin="5"
+                          BackgroundColor="#FFFFFF"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Fill">
+
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="{Binding Name}" FontAttributes="Bold"/>
+
+                            <Label Text="{Binding Email}"/>
+                        </VerticalStackLayout>
+
+                        <Switch Grid.Column="1"
+                                IsToggled="{Binding IsActive}"
+                                IsEnabled="False"
+                                VerticalOptions="Center" />
+
+                        <Grid.GestureRecognizers>
                             <TapGestureRecognizer
                                 Command="{Binding BindingContext.UserSelectedCommand, Source={x:Reference UsersPageRef}}"
                                 CommandParameter="{Binding .}" />
-                        </Frame.GestureRecognizers>
+                        </Grid.GestureRecognizers>
 
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                            <Label Text="{Binding Email}" />
-                            <Label Text="{Binding Phone}" />
-                            <Label Text="{Binding Username}" />
-                            <Label Text="{Binding IsActive}" />
-                        </VerticalStackLayout>
-                    </Frame>
+                    </Grid>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
